@@ -18,15 +18,15 @@ define([
         correctTitle: "",
 
         constructor: function(guessIsCorrect, correctTitle) {
-            this.guessIsCorrect = guessIsCorrect;
-
-            if(this.guessIsCorrect) {
+            if(guessIsCorrect) {
                 this.resultLabel = "Correct!";
                 this.correctTitle = "";
             } else {
                 this.resultLabel = "Wrong!";
                 this.correctTitle = correctTitle;
             }
+
+            this.guessIsCorrect = guessIsCorrect;
         },
 
         startup: function () {

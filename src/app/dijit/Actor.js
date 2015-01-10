@@ -11,32 +11,12 @@ define([
         imageURL: "",
 
         constructor: function(name, imageURL) {
-            this.setName(name);
-            this.setImageURL(imageURL);
-        },
-
-        postMixInProperties: function () {
-            this.inherited(arguments);
-        },
-
-        buildRendering: function () {
-            this.inherited(arguments);
-        },
-
-        postCreate: function () {
-            this.inherited(arguments);
+            this.name = name;
+            this.imageURL = imageURL;
         },
 
         startup: function () {
             this.inherited(arguments);
-        },
-
-        setName: function(name) {
-            this.name = name;
-        },
-
-        setImageURL: function(imageURL) {
-            this.imageURL = imageURL;
         }
     });
 });

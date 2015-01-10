@@ -7,7 +7,7 @@ define([
 ], function (declare, lang, script, Constants, Movie) {
     return declare(null, {
 
-        generateQuery: function(limit) {
+        generateQuery: function() {
             return [{
                 "type": "/film/film",
                 "limit": 100,
