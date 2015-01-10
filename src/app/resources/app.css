@@ -1,4 +1,64 @@
 @import '../../dojo/resources/dojo.css';
 @import '../../dijit/themes/claro/claro.css';
 @import '../../dgrid/css/dgrid.css';
-html,body{height:100%;margin:0;padding:0}.loading{font-size:1.5em;text-align:center;}.loaded .loading{display:none}
+@import 'bootstrap.min.css';
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
+html,body {
+    height: 100%;
+    margin: 0;
+    padding: 0
+}
+
+.movie-node {
+    min-height: 250px;
+    height:250px;
+    border: solid 1px #666;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #444;
+}
+
+.movie-node:hover {
+    background-color: #222;
+}
+
+.guess-result-container div {
+    background-color: rgba(236,236,236, 0.95);
+    border: solid 1px #000;
+    text-align:center;
+    width:100%;
+    padding: 0 10px 20px 10px;
+}
+
+.guess-result-container > div > h3 {
+    color: #333;
+}
+
+.guess-incorrect-label {
+    color: #ff0000;
+}
+
+.guess-correct-label {
+    color: #00cf00;
+}
+
+#movieLoading {
+    width: 100%;
+    text-align: center;
+}
+
+#movieDetails {
+    margin-top: 100px;
+    margin-bottom: 20px;
+}
+
+#movieDetails > div > h4 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2em;
+}
+
+#movieList {
+    margin-top:0;
+    min-height: 260px;
+    height:260px;
+}
