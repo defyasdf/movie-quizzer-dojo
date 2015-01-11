@@ -7,7 +7,7 @@ define([
     "dojo/on",
     "dojo/topic",
     "dojo/dom-class",
-    'dojo/text!app/dijit/templates/Main',
+    'dojo/text!app/dijit/templates/Main.html',
     "app/dijit/About",
     "app/dijit/Play",
     "app/events/NavigationEvent"

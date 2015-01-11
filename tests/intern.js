@@ -70,10 +70,14 @@ define({
 	},
 
 	// Non-functional test suite(s) to run in each browser
-	suites: [ 'tests/unit/Dialog' ],
+	suites: [
+		'tests/unit/Actor',
+		'tests/unit/Movie',
+		'tests/unit/FreebaseUtil'
+	],
 
 	// Functional test suite(s) to run in each browser once non-functional tests are completed
-	functionalSuites: [ 'tests/functional/index' ],
+	functionalSuites: [ ],
 
 	// A regular expression matching URLs to files that should not be included in code coverage analysis
 	// In the case of the boilerplate, we only want to know about stuff from `app`

@@ -3,9 +3,11 @@ define([
     "dojo/_base/lang",
     "dojo/request/script",
     "app/data/Constants",
-    "app/dijit/Movie"
-], function (declare, lang, script, Constants, Movie) {
+    "app/dijit/Movie",
+    "app/dijit/Actor"
+], function (declare, lang, script, Constants, Movie, Actor) {
     return declare(null, {
+        fullMovieList: [],
 
         generateQuery: function() {
             return [{
@@ -26,7 +28,7 @@ define([
                         "mid": null,
                         "name": null
                     },
-                    "limit": 8
+                    "limit": 4
                 }],
                 "directed_by": [],
                 "genre": [],
@@ -36,14 +38,14 @@ define([
         },
 
         getMovies: function (limit) {
-            var _this = this;
-            var query = this.generateQuery(limit);
-            var params = {
-                jsonp: "callback",
-                'query': {
-                    'key': Constants.prototype.api_key,
-                    'query': JSON.stringify(query)
-                }
+            var _this = this,
+                query = this.generateQuery(limit),
+                params = {
+                    jsonp: "callback",
+                    'query': {
+                        'key': Constants.prototype.api_key,
+                        'query': JSON.stringify(query)
+                    }
             };
 
             return script.get(Constants.prototype.service_url, params)
@@ -70,7 +72,6 @@ define([
 
             for(var m=0; m < movieList.length; m++) {
                 if(movieList[m]){
-                    var posterURL = Constants.prototype.image_path_poster.replace("{{id}}", movieList[m].mid);
                     parsedMovieList.push(
                         new Movie(
                             movieList[m].name,
@@ -80,7 +81,6 @@ define([
                             movieList[m].directed_by[0],
                             movieList[m].gross_revenue[0].amount,
                             this.parseActors(movieList[m].starring),
-                            posterURL,
                             movieList[m].mid
                         )
                     );
@@ -97,11 +97,10 @@ define([
 
             for (var star=0; star < actorList.length; star++) {
                 parsedActorList.push(
-                    {
-                    'name': actorList[star]['/film/performance/actor'].name,
-                    'image': Constants.prototype.image_path
-                        .replace("{{id}}", actorList[star]['/film/performance/actor'].mid)
-                    }
+                    new Actor(
+                        actorList[star]['/film/performance/actor'].name,
+                        actorList[star]['/film/performance/actor'].mid
+                    )
                 );
             }
 

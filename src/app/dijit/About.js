@@ -7,7 +7,7 @@ define([
     "dojo/on",
     "dojo/topic",
     "app/events/NavigationEvent",
-    'dojo/text!app/dijit/templates/About'
+    'dojo/text!app/dijit/templates/About.html'
 ], function (WidgetsInTemplateMixin, TemplatedMixin, WidgetBase, declare, lang, on, topic, NavigationEvent, template) {
     return declare([WidgetBase, TemplatedMixin, WidgetsInTemplateMixin], {
         templateString: template,

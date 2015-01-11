@@ -35,7 +35,6 @@ echo -n "Cleaning old files..."
 rm -rf "$DISTDIR"
 echo " Done"
 
-node_modules/.bin/stylus -c "$SRCDIR/app/resources/app.styl"
 "$TOOLSDIR/build.sh" --profile "$PROFILE" --releaseDir "$DISTDIR" $@
 
 cd "$BASEDIR"
@@ -47,5 +46,11 @@ perl -pe 's/\n/ /g;            # Replace newlines with whitespace' |
 perl -pe 's/<\!--.*?-->//g;    # Strip HTML comments' |
 perl -pe 's/isDebug: *true,//; # Remove isDebug' |
 perl -pe 's/\s+/ /g;           # Collapse whitespace' > "$DISTDIR/index.html"
+
+cd "$DISTDIR"
+
+echo "Removing uncompressed and console stripped files..."
+find . -name \*.uncompressed.js -type f -delete
+find . -name \*.consoleStripped.js -type f -delete
 
 echo "Build complete"

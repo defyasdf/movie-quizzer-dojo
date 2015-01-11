@@ -5,22 +5,24 @@ define([
     'dojo/_base/declare',
     'dojo/_base/lang',
     "dojo/topic",
+    "dojo/on",
     "dojo/dom-attr",
     "dojo/dom-class",
     'dojo/dom',
     'dojo/dom-construct',
-    'dojo/text!app/dijit/templates/Play',
+    'dojo/text!app/dijit/templates/Play.html',
     "app/data/Constants",
     "app/utils/FreebaseUtil",
     "app/events/MovieEvent",
     "app/dijit/Result"
-], function (WidgetsInTemplateMixin, TemplatedMixin, WidgetBase, declare, lang, topic,
+], function (WidgetsInTemplateMixin, TemplatedMixin, WidgetBase, declare, lang, topic, on,
              domAttr, domClass, dom, domConstruct, template, Constants, FreebaseUtil,
              MovieEvent, Result) {
     return declare([WidgetBase, TemplatedMixin, WidgetsInTemplateMixin], {
         templateString: template,
         movies: [],
         movie: null,
+        freebaseUtil: new FreebaseUtil(),
 
         startup: function () {
             this.inherited(arguments);
@@ -29,36 +31,43 @@ define([
             topic.subscribe(MovieEvent.prototype.MOVIE_CLICKED, lang.hitch(this, this.movieClicked));
             topic.subscribe(MovieEvent.prototype.NEXT_ROUND, lang.hitch(this, this.setupMovies));
 
+            on(this.movieHintBtn, "click", lang.hitch(this, this.movieHintClicked));
+
             //Initially setup a round of movies
             this.setupMovies();
         },
 
+        toggleLoading: function(showLoading) {
+            if(showLoading) {
+                domClass.remove(this.movieLoading, "hidden");
+                domClass.add(this.movieDetails, "hidden");
+            } else {
+                domClass.remove(this.movieDetails, "hidden");
+                domClass.add(this.movieLoading, "hidden");
+            }
+        },
+
         setupMovies: function() {
-            domClass.remove(this.movieLoading, "hidden");
-            domClass.add(this.movieDetails, "hidden");
+            //show our loading message and hide the movie list
+            this.toggleLoading(true);
 
             //In case we have movies from a previous round, remove all to be sure we start clean
             this.removeAllMovies();
 
             //Get the movies with a call to Freebase using our Freebase Utility
-            FreebaseUtil.prototype.getMovies(Constants.prototype.NUMBER_OF_MOVIES)
+            this.freebaseUtil.getMovies(Constants.prototype.NUMBER_OF_MOVIES)
                 .then(lang.hitch(this, function(movies) {
-                    domClass.remove(this.movieDetails, "hidden");
-                    domClass.add(this.movieLoading, "hidden");
+                    //hide our loading message and show the movie list
+                    this.toggleLoading(false);
 
-                    //We need to loop over each movie and place the resulting dom node into
-                    //our movie list
-                    for(var mv=0; mv < movies.length; mv++) {
-                        //Call the startup method as it is not always called automatically
-                        movies[mv].startup();
-                        //Place the movie as the last item in our movie list
-                        domConstruct.place(movies[mv].domNode, dom.byId("movieList"), "last");
-                    }
+                    //We need to loop over each movie and place the resulting
+                    //dom node into our movie list
+                    this.createMovieModuleList(movies);
 
                     //Randomly select one of our movies as the correct option
                     this.setSelectedMovie(
                         movies[
-                            FreebaseUtil.prototype.getRandomNumber(
+                            this.freebaseUtil.getRandomNumber(
                                 0,
                                 (Constants.prototype.NUMBER_OF_MOVIES - 1)
                             )
@@ -68,6 +77,15 @@ define([
                     //Store the movies so we can have a reference to destroy them later
                     this.movies = movies;
                 }));
+        },
+
+        createMovieModuleList: function(movies) {
+            for(var mv=0; mv < movies.length; mv++) {
+                //Call the startup method as it is not always called automatically
+                movies[mv].startup();
+                //Place the movie as the last item in our movie list
+                domConstruct.place(movies[mv].domNode, dom.byId("movieList"), "last");
+            }
         },
 
         movieClicked: function(evt) {
@@ -88,6 +106,11 @@ define([
             domConstruct.place(result.domNode, "movieList", "before");
         },
 
+        movieHintClicked: function(evt) {
+            domClass.add(this.movieHintBtn, "hidden");
+            domClass.remove(this.movieHint, "hidden");
+        },
+
         setSelectedMovie: function(movieObj) {
             //if the movie does not have a tagline, we don't use it and start the process over. Otherwise
             //we set the movie attributes to the elements in the dom
@@ -97,6 +120,12 @@ define([
                 domAttr.set(this.genreLabel, "innerHTML", movieObj.genre);
                 domAttr.set(this.directorLabel, "innerHTML", movieObj.director);
                 domAttr.set(this.revenueLabel, "innerHTML", movieObj.revenue);
+
+                for(var actorIdx=0; actorIdx < movieObj.actors.length; actorIdx++) {
+                    movieObj.actors[actorIdx].startup();
+                    domConstruct.place(movieObj.actors[actorIdx].domNode, "actorList", "last");
+                }
+
                 this.movie = movieObj;
             } else {
                 //Get new movies until we have a tagline
@@ -107,9 +136,18 @@ define([
         removeAllMovies: function() {
             for(var mv=0; mv < this.movies.length; mv++) {
                 this.movies[mv].destroy();
+
+                for(var act=0; act < this.movies[mv].actors.length; act++) {
+                    this.movies[mv].actors[act].destroy();
+                }
+
             }
 
+            domClass.add(this.movieHint, "hidden");
+            domClass.remove(this.movieHintBtn, "hidden");
+
             domAttr.set(this.movieList, "innerHTML", "");
+            domAttr.set(this.actorList, "innerHTML", "");
         }
     });
 });

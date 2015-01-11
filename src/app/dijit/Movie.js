@@ -7,8 +7,9 @@ define([
     "dojo/on",
     "dojo/topic",
     'dojo/text!app/dijit/templates/Movie.html',
-    "app/events/MovieEvent"
-], function (WidgetsInTemplateMixin, TemplatedMixin, WidgetBase, declare, lang, on, topic, template, MovieEvent) {
+    "app/events/MovieEvent",
+    "app/data/Constants"
+], function (WidgetsInTemplateMixin, TemplatedMixin, WidgetBase, declare, lang, on, topic, template, MovieEvent, Constants) {
     return declare([WidgetBase, TemplatedMixin, WidgetsInTemplateMixin], {
         templateString: template,
         title: "",
@@ -21,7 +22,7 @@ define([
         imageURL: "",
         movieID: "",
 
-        constructor: function(title, tagline, releaseDate, genre, director, revenue, actors, imageURL, movieID) {
+        constructor: function(title, tagline, releaseDate, genre, director, revenue, actors, movieID) {
             this.title = title;
             this.tagline = tagline;
             this.releaseDate = releaseDate;
@@ -29,7 +30,7 @@ define([
             this.director = director;
             this.revenue = revenue;
             this.actors = actors;
-            this.imageURL = imageURL;
+            this.imageURL = this.getImageURL(movieID);
             this.movieID = movieID;
         },
 
@@ -52,7 +53,10 @@ define([
             this.revenue = '$' + Number(revenue)
                 .toFixed(2)
                 .replace(/\d(?=(\d{3})+\.)/g, '$&,');
-        }
+        },
 
+        getImageURL: function(movieID) {
+            return Constants.prototype.image_path_poster.replace("{{id}}", movieID);
+        }
     });
 });
