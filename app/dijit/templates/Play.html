@@ -1,0 +1,26 @@
+<div>
+    <div id="movieLoading" data-dojo-attach-point="movieLoading">
+        <h2>Loading Movies...</h2>
+    </div>
+
+    <div id="movieDetails" data-dojo-attach-point="movieDetails" class="row hidden">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+            <h4 data-dojo-attach-point="taglineLabel"></h4>
+            <h5 data-dojo-attach-point="movieHintBtn">
+                <a>Give me a hint!</a>
+            </h5>
+
+            <div data-dojo-attach-point="movieHint" class="hidden">
+                <span>
+                    <span data-dojo-attach-point="genreLabel"></span>
+                    released in <span data-dojo-attach-point="yearLabel"></span>.
+                    Directed by <span data-dojo-attach-point="directorLabel"></span>,
+                    grossing a total of <span data-dojo-attach-point="revenueLabel"></span>
+                </span>
+                <div id="actorList" data-dojo-attach-point="actorList"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="movieList" data-dojo-attach-point="movieList" class="row"></div>
+</div>

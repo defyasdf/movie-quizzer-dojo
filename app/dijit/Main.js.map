@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"Main.js",
+"lineCount":4,
+"mappings":"A;AAAAA,OAAA,SACA,mCADA,m0BASAC;MAAA,kBAAyB,8OAAA,MAAA,KAAzB,CAaG,QAAA,CAAUC,CAAV,CAAkCC,CAAlC,CAAkDC,CAAlD,CAA8DC,CAA9D,CACUC,CADV,CACgBC,CADhB,CACoBC,CADpB,CAC2BC,CAD3B,CACqCC,CADrC,CAC+CC,CAD/C,CACsDC,CADtD,CAC4DC,CAD5D,QAGQR,EAAA,EAASD,CAAT,CAAqBD,CAArB,CAAqCD,CAArC,kBACaQ,CADb,SAQMI,QAAAA,GACLC,cAAA,CAAeC,SAAf,CAGAR,EAAAS,UAAA,CAAgBJ,CAAAK,UAAAC,MAAhB,CAAiDb,CAAAc,MAAA,MAAiBC,oBAAjB,CAAjD,CACAb,EAAAS,UAAA,CAAgBJ,CAAAK,UAAAI,KAAhB,CAAgDhB,CAAAc,MAAA,MAAiBG,mBAAjB,CAAhD,CAEAhB;CAAA,CAAGiB,gBAAH,SAA8BlB,CAAAc,MAAA,MAAiBC,oBAAjB,CAA9B,CACAd,EAAA,CAAGkB,eAAH,SAA6BnB,CAAAc,MAAA,MAAiBG,mBAAjB,CAA7B,CARKT,CARN,iBAsBcO,QAAAA,GACbZ,CAAAiB,IAAA,0BACAjB,EAAAkB,OAAA,2BAFaN,CAtBd,gBA8BaE,QAAAA,GACZd,CAAAiB,IAAA,2BACAjB,EAAAkB,OAAA,0BAFYJ,CA9Bb,EAHR,CAbH;",
+"sources":["Main.js.uncompressed.js"],
+"names":["require","define","WidgetsInTemplateMixin","TemplatedMixin","WidgetBase","declare","lang","on","topic","domClass","template","About","Play","NavigationEvent","startup","inherited","arguments","subscribe","prototype","ABOUT","hitch","navigateToAbout","PLAY","navigateToPlay","navAboutBtn","navPlayBtn","add","remove"]
+}

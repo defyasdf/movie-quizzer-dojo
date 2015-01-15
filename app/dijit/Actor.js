@@ -1,0 +1,4 @@
+//>>built
+require({cache:{"url:app/dijit/templates/Actor.html":'\x3cdiv class\x3d"col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center actor-node"\x3e\n    \x3ch5\x3e${name}\x3c/h5\x3e\n    \x3cimg src\x3d"${imageURL}" alt\x3d"${name}" class\x3d"img-circle"\x3e\n\x3c/div\x3e'}});
+define("app/dijit/Actor","dijit/_WidgetsInTemplateMixin dijit/_TemplatedMixin dijit/_WidgetBase dojo/_base/declare dojo/text!app/dijit/templates/Actor.html app/data/Constants".split(" "),function(c,d,e,f,g,h){return f([e,d,c],{templateString:g,name:"",imageURL:"",actorID:"",constructor:function(a,b){this.name=a;this.actorID=b;this.imageURL=this.getImageURL(b)},startup:function(){this.inherited(arguments)},getImageURL:function(a){return h.prototype.image_path.replace("{{id}}",a)}})});
+//# sourceMappingURL=Actor.js.map

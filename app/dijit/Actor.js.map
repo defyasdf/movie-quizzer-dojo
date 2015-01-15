@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"Actor.js",
+"lineCount":3,
+"mappings":"A;AAAAA,OAAA,SACA,oCADA,oNASAC;MAAA,mBAA0B,sJAAA,MAAA,KAA1B,CAOG,QAAA,CAAUC,CAAV,CAAkCC,CAAlC,CAAkDC,CAAlD,CAA8DC,CAA9D,CAAuEC,CAAvE,CAAiFC,CAAjF,QACQF,EAAA,EAASD,CAAT,CAAqBD,CAArB,CAAqCD,CAArC,kBACaI,CADb,4CAWUE,QAAAA,CAASC,CAATD,CAAeE,CAAfF,EACTC,SADSD,CACGC,CACZC,aAFSF,CAEME,CACfC,cAHSH,CAGOI,gBAAA,CAAiBF,CAAjB,CAHPF,CAXV,SAoBMK,QAAAA,GACLC,cAAA,CAAeC,SAAf,CADKF,CApBN,aA8BUD,QAAAA,CAASF,CAATE,QAEFL,EAAAS,UAAAC,WAAAC,QAAA,UAAiDR,CAAjD,CAFEE,CA9BV,EADR,CAPH;",
+"sources":["Actor.js.uncompressed.js"],
+"names":["require","define","WidgetsInTemplateMixin","TemplatedMixin","WidgetBase","declare","template","Constants","constructor","name","actorID","imageURL","getImageURL","startup","inherited","arguments","prototype","image_path","replace"]
+}

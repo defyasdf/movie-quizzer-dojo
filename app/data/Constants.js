@@ -1,0 +1,3 @@
+//>>built
+define("app/data/Constants",["dojo/_base/declare","dojo/request/script"],function(a,b){return a([],{NUMBER_OF_MOVIES:4,service_url:"https://www.googleapis.com/freebase/v1/mqlread",api_key:"AIzaSyCTjRzqa0530KFmdQHoWnj2dYVhDoThRts",image_path:"https://usercontent.googleapis.com/freebase/v1/image{{id}}?maxwidth\x3d64\x26maxheight\x3d64\x26mode\x3dfillcropmid\x26key\x3dAIzaSyCTjRzqa0530KFmdQHoWnj2dYVhDoThRts",image_path_poster:"https://usercontent.googleapis.com/freebase/v1/image{{id}}?maxwidth\x3d150\x26maxheight\x3d180\x26mode\x3dfillcropmid\x26key\x3dAIzaSyCTjRzqa0530KFmdQHoWnj2dYVhDoThRts"})});
+//# sourceMappingURL=Constants.js.map

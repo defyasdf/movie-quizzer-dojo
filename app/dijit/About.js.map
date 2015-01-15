@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"About.js",
+"lineCount":3,
+"mappings":"A;AAAAA,OAAA,SACA,oCADA,4qCAQAC;MAAA,mBAA0B,iMAAA,MAAA,KAA1B,CAUG,QAAA,CAAUC,CAAV,CAAkCC,CAAlC,CAAkDC,CAAlD,CAA8DC,CAA9D,CAAuEC,CAAvE,CAA6EC,CAA7E,CAAiFC,CAAjF,CAAwFC,CAAxF,CAAyGC,CAAzG,QACQL,EAAA,EAASD,CAAT,CAAqBD,CAArB,CAAqCD,CAArC,kBACaQ,CADb,SAOMC,QAAAA,GACLC,cAAA,CAAeC,SAAf,CAEAN,EAAA,CAAGO,gBAAH,SAA8BR,CAAAS,MAAA,MAAiBC,oBAAjB,CAA9B,CAHKL,CAPN,iBAgBcK,QAAAA,CAASC,CAATD,EACbR,CAAAU,QAAA,CAAcT,CAAAU,UAAAC,KAAd,CADaJ,CAhBd,EADR,CAVH;",
+"sources":["About.js.uncompressed.js"],
+"names":["require","define","WidgetsInTemplateMixin","TemplatedMixin","WidgetBase","declare","lang","on","topic","NavigationEvent","template","startup","inherited","arguments","playGameBtn","hitch","playGameClicked","evt","publish","prototype","PLAY"]
+}

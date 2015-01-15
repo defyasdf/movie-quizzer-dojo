@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"NavigationEvent.js",
+"lineCount":2,
+"mappings":"A;AAAAA,MAAA,qDAEG,QAAA,CAAUC,CAAV,QACQA,EAAA,kEADR,CAFH;",
+"sources":["NavigationEvent.js.uncompressed.js"],
+"names":["define","declare"]
+}

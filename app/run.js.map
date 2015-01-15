@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"run.js",
+"lineCount":2,
+"mappings":"A;AAAAA,MAAA,+CAGG,QAAA,CAAUC,CAAV,MACEC,IAEJA,EAAAC,KAHE,CAGSC,CAAA,IAAIH,CAAJG,SAAA,CAAmBC,QAAAC,KAAnB,CACXJ,EAAAC,KAAAI,QAAA,EAJE,OAMKL,EANL,CAHH;",
+"sources":["run.js.uncompressed.js"],
+"names":["define","Main","app","main","placeAt","document","body","startup"]
+}

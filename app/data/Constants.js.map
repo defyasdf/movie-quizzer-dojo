@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"Constants.js",
+"lineCount":2,
+"mappings":"A;AAMAA,MAAA,mEAGG,QAAA,CAAUC,CAAV,CAAmBC,CAAnB,QACQD,EAAA,ufADR,CAHH;",
+"sources":["Constants.js.uncompressed.js"],
+"names":["define","declare","script"]
+}

@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"Result.js",
+"lineCount":4,
+"mappings":"A;AAAAA,OAAA,SACA,qCADA,6eAEAC;MAAA,oBAA2B,+NAAA,MAAA,KAA3B,CAYG,QAAA,CAAUC,CAAV,CAAkCC,CAAlC,CAAkDC,CAAlD,CAA8DC,CAA9D,CAAuEC,CAAvE,CAA6EC,CAA7E,CAAiFC,CAAjF,CAA+FC,CAA/F,CAAyGC,CAAzG,CAAgHC,CAAhH,CAA0HC,CAA1H,QACQP,EAAA,EAASD,CAAT,CAAqBD,CAArB,CAAqCD,CAArC,kBACaS,CADb,8DAMUE,QAAAA,CAASC,CAATD,CAAyBE,CAAzBF,EACNC,CADMD,EAELG,gBAFKH,YAGLE,iBAHKF,MAKLG,gBALKH,UAMLE,iBANKF;AAMeE,CANfF,CASTC,oBATSD,CASaC,CATbD,CANV,SAkBMI,QAAAA,GACLC,cAAA,CAAeC,SAAf,CAEGL,oBAHEG,EAIDT,CAAAY,QAAA,CAAqBC,sBAArB,CAJCJ,CAKDR,CAAAa,OAAA,CAAgBN,gBAAhB,yBALCC,CAMDR,CAAAc,IAAA,CAAaP,gBAAb,uBANCC,GAQDR,CAAAa,OAAA,CAAgBN,gBAAhB,uBARCC,CASDR,CAAAc,IAAA,CAAaP,gBAAb,yBATCC,CAYLV,EAAA,CAAGiB,iBAAH,SAA+BlB,CAAAmB,MAAA,MAAiBC,qBAAjB,CAA/B,CAZKT,CAlBN,kBAiCeS,QAAAA,CAASC,CAATD,EACdhB,CAAAkB,QAAA,CAAchB,CAAAiB,UAAAC,WAAd,CAEAV,aAAA,EAHcM,CAjCf,EADR,CAZH;",
+"sources":["Result.js.uncompressed.js"],
+"names":["require","define","WidgetsInTemplateMixin","TemplatedMixin","WidgetBase","declare","lang","on","domConstruct","domClass","topic","template","MovieEvent","constructor","guessIsCorrect","correctTitle","resultLabel","startup","inherited","arguments","destroy","correctTitleLabel","remove","add","nextRoundBtn","hitch","nextRoundClicked","evt","publish","prototype","NEXT_ROUND"]
+}

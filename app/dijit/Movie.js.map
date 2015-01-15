@@ -1,0 +1,8 @@
+{
+"version":3,
+"file":"Movie.js",
+"lineCount":5,
+"mappings":"A;AAAAA,OAAA,SACA,oCADA,4TAEAC;MAAA,mBAA0B,+MAAA,MAAA,KAA1B,CAWG,QAAA,CAAUC,CAAV,CAAkCC,CAAlC,CAAkDC,CAAlD,CAA8DC,CAA9D,CAAuEC,CAAvE,CAA6EC,CAA7E,CAAiFC,CAAjF,CAAwFC,CAAxF,CAAkGC,CAAlG,CAA8GC,CAA9G,QACQN,EAAA,EAASD,CAAT,CAAqBD,CAArB,CAAqCD,CAArC,kBACaO,CADb,iHAYUG,QAAAA,CAASC,CAATD,CAAgBE,CAAhBF,CAAyBG,CAAzBH,CAAsCI,CAAtCJ,CAA6CK,CAA7CL,CAAuDM,CAAvDN,CAAgEO,CAAhEP,CAAwEQ,CAAxER,EACTC,UADSD,CACIC,CACbC,aAFSF,CAEME,CACfC,iBAHSH,CAGUG,CACnBC,WAJSJ;AAIII,CACbC,cALSL,CAKOK,CAChBC,aANSN,CAMMM,CACfC,YAPSP,CAOKO,CACdE,cARST,CAQOU,gBAAA,CAAiBF,CAAjB,CAChBA,aATSR,CASMQ,CATNR,CAZV,SAwBMW,QAAAA,GACLC,cAAA,CAAeC,SAAf,CAGAlB,EAAA,CAAGmB,cAAH,SAA4BpB,CAAAqB,MAAA,MAAiBC,iBAAjB,CAA5B,CAJKL,CAxBN,cA+BWK,QAAAA,CAASC,CAATD,EAEVpB,CAAAsB,QAAA,CAAcpB,CAAAqB,UAAAC,cAAd,UACaZ,YADb,EAFUQ,CA/BX,qBAsCkBK,QAAAA,CAASlB,CAATkB,EAEjBlB,gBAFiBkB,CAEEC,CAAA,IAAIC,IAAJ,CAASpB,CAAT,CAAAmB,aAAA,EAFFD,CAtClB,iBA2CcG,QAAAA,CAASlB,CAATkB,EAEblB,YAFakB,KAEQC,MAAA,CAAOnB,CAAP,CAAAoB,QAAA,GAAAC,QAAA,8BAFRH,CA3Cd,aAkDUd,QAAAA,CAASF,CAATE,QAEFX,EAAAoB,UAAAS,kBAAAD,QAAA;AAAwDnB,CAAxD,CAFEE,CAlDV,EADR,CAXH;",
+"sources":["Movie.js.uncompressed.js"],
+"names":["require","define","WidgetsInTemplateMixin","TemplatedMixin","WidgetBase","declare","lang","on","topic","template","MovieEvent","Constants","constructor","title","tagline","releaseDate","genre","director","revenue","actors","movieID","imageURL","getImageURL","startup","inherited","arguments","movieLink","hitch","movieClicked","evt","publish","prototype","MOVIE_CLICKED","_setReleaseDateAttr","getFullYear","Date","_setRevenueAttr","Number","toFixed","replace","image_path_poster"]
+}
