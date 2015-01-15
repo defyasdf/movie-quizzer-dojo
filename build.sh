@@ -53,4 +53,9 @@ echo "Removing uncompressed and console stripped files..."
 find . -name \*.uncompressed.js -type f -delete
 find . -name \*.consoleStripped.js -type f -delete
 
+cd "$SRCDIR"
+
+echo "Building documentation..."
+./node_modules/.bin/jsdoc src/app -r -c ./profiles/jsdoc.conf.json -d docs
+
 echo "Build complete"
