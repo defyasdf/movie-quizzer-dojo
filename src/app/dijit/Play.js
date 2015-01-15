@@ -39,9 +39,11 @@ define([
 
         toggleLoading: function(showLoading) {
             if(showLoading) {
+                //show the loading message
                 domClass.remove(this.movieLoading, "hidden");
                 domClass.add(this.movieDetails, "hidden");
             } else {
+                //hide the loading message
                 domClass.remove(this.movieDetails, "hidden");
                 domClass.add(this.movieLoading, "hidden");
             }
@@ -121,11 +123,13 @@ define([
                 domAttr.set(this.directorLabel, "innerHTML", movieObj.director);
                 domAttr.set(this.revenueLabel, "innerHTML", movieObj.revenue);
 
+                //loop over the actors list and startup instances, place them into the dom
                 for(var actorIdx=0; actorIdx < movieObj.actors.length; actorIdx++) {
                     movieObj.actors[actorIdx].startup();
                     domConstruct.place(movieObj.actors[actorIdx].domNode, "actorList", "last");
                 }
 
+                //store the selected movie for use later
                 this.movie = movieObj;
             } else {
                 //Get new movies until we have a tagline
@@ -134,18 +138,23 @@ define([
         },
 
         removeAllMovies: function() {
+            //loop over all the movies
             for(var mv=0; mv < this.movies.length; mv++) {
+                //destroy our movie instances
                 this.movies[mv].destroy();
 
+                //loop over all actors
                 for(var act=0; act < this.movies[mv].actors.length; act++) {
+                    //destroy our actor instances
                     this.movies[mv].actors[act].destroy();
                 }
 
             }
 
+            //hide the movie hint and show the hint button for the next movie
             domClass.add(this.movieHint, "hidden");
             domClass.remove(this.movieHintBtn, "hidden");
-
+            //clear the movie and actor list, in case anything has not been cleaned up
             domAttr.set(this.movieList, "innerHTML", "");
             domAttr.set(this.actorList, "innerHTML", "");
         }

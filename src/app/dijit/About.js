@@ -1,3 +1,9 @@
+/**
+ * Widget for displaying description of the site and giving attribution to frameworks and services used
+ *
+ * @module app/dijit/About
+ */
+
 define([
     'dijit/_WidgetsInTemplateMixin',
     'dijit/_TemplatedMixin',
@@ -12,12 +18,19 @@ define([
     return declare([WidgetBase, TemplatedMixin, WidgetsInTemplateMixin], {
         templateString: template,
 
+        /**
+         * Called after DOM fragments have been added to the document.
+         * Handles button click to dispatch navigation event to route to play the game.
+         */
         startup: function () {
             this.inherited(arguments);
 
             on(this.playGameBtn, "click", lang.hitch(this, this.playGameClicked));
         },
 
+        /**
+         * Publishes a navigation event to route to play the game.
+         */
         playGameClicked: function(evt) {
             topic.publish(NavigationEvent.prototype.PLAY);
         }

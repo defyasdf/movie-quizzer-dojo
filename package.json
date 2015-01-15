@@ -1,6 +1,6 @@
 {
 	"name": "movie-quiz-dojo",
-	"version": "0.1",
+	"version": "0.1.0",
 	"description": "Movie quiz game built with the Dojo JavaScript framework.",
 	"license": "BSD-3-Clause",
 	"repository": {
