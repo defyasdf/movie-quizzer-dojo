@@ -5,9 +5,8 @@
  */
 
 define([
-    'dojo/_base/declare',
-    "dojo/request/script"
-], function (declare, script) {
+    'dojo/_base/declare'
+], function (declare) {
     return declare([], {
         /**
          * @constant NUMBER_OF_MOVIES
@@ -20,11 +19,19 @@ define([
          **/
         service_url: 'https://www.googleapis.com/freebase/v1/mqlread',
         /**
-         * @constant NUMBER_OF_MOVIES
-         * @description The number of movies for guessing
+         * @constant API_KEY
+         * @description The API Key for Google Freebase
          **/
         api_key: 'AIzaSyCTjRzqa0530KFmdQHoWnj2dYVhDoThRts',
+        /**
+         * @constant IMAGE_PATH
+         * @description Image path template for freebase images, using {{id}} as a placeholder for the mid result
+         **/
         image_path: 'https://usercontent.googleapis.com/freebase/v1/image{{id}}?maxwidth=64&maxheight=64&mode=fillcropmid&key=' + 'AIzaSyCTjRzqa0530KFmdQHoWnj2dYVhDoThRts',
+        /**
+         * @constant IMAGE_PATH_POSTER
+         * @description Image path template for freebase movie poster images, using {{id}} as a placeholder for the mid result
+         **/
         image_path_poster: 'https://usercontent.googleapis.com/freebase/v1/image{{id}}?maxwidth=150&maxheight=180&mode=fillcropmid&key=' + 'AIzaSyCTjRzqa0530KFmdQHoWnj2dYVhDoThRts'
     });
 });

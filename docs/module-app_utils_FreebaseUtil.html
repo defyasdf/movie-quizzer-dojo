@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: dijit/About.js</title>
+    <title>JSDoc: Module: app/utils/FreebaseUtil</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,57 +17,136 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: dijit/About.js</h1>
+    <h1 class="page-title">Module: app/utils/FreebaseUtil</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * Widget for displaying description of the site and giving attribution to frameworks and services used
- *
- * @module app/dijit/About
- * @requires app/events/NavigationEvent
- */
+        
+            
+        
+    
+</header>
 
-define([
-    'dijit/_WidgetsInTemplateMixin',
-    'dijit/_TemplatedMixin',
-    'dijit/_WidgetBase',
-    'dojo/_base/declare',
-    "dojo/_base/lang",
-    "dojo/on",
-    "dojo/topic",
-    "app/events/NavigationEvent",
-    'dojo/text!app/dijit/templates/About.html'
-], function (WidgetsInTemplateMixin, TemplatedMixin, WidgetBase, declare, lang, on, topic, NavigationEvent, template) {
-    return declare([WidgetBase, TemplatedMixin, WidgetsInTemplateMixin], {
-        templateString: template,
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Utility module to perform data calls to Google Freebase</div>
+        
 
-        /**
-         * Called after DOM fragments have been added to the document.
-         * Handles button click to dispatch navigation event to route to play the game.
-         */
-        startup: function () {
-            this.inherited(arguments);
+        
+            
 
-            on(this.playGameBtn, "click", lang.hitch(this, this.playGameClicked));
-        },
 
-        /**
-         * Publishes a navigation event to route to play the game.
-         */
-        playGameClicked: function(evt) {
-            topic.publish(NavigationEvent.prototype.PLAY);
-        }
-    });
-});
-</code></pre>
-        </article>
-    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="utils_FreebaseUtil.js.html">utils/FreebaseUtil.js</a>, <a href="utils_FreebaseUtil.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+        <h3 class="subsection-title">Requires</h3>
+
+        <ul>
+            <li><a href="module-app_dijit_Movie.html">module:app/dijit/Movie</a></li>
+        
+            <li><a href="module-app_dijit_Actor.html">module:app/dijit/Actor</a></li>
+        
+            <li><a href="module-app_data_Constants.html">module:app/data/Constants</a></li>
+        </ul>
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

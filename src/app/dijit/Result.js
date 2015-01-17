@@ -1,3 +1,10 @@
+/**
+ * Widget for displaying the success/failure of the user's movie guess
+ *
+ * @module app/dijit/Result
+ * @requires app/events/MovieEvent
+ */
+
 define([
     'dijit/_WidgetsInTemplateMixin',
     'dijit/_TemplatedMixin',
@@ -17,6 +24,12 @@ define([
         resultLabel: "",
         correctTitle: "",
 
+        /**
+         * Sets up the interface with a success/failure message to the user. Shows the correct title of the movie if the
+         * guess was incorrect.
+         * @param {boolean} guessIsCorrect - Was the user's guess correct
+         * @param {string} correctTitle - The correct title of the movie, only populated if the user's guess was incorrect.
+         */
         constructor: function(guessIsCorrect, correctTitle) {
             if(guessIsCorrect) {
                 this.resultLabel = "Correct!";

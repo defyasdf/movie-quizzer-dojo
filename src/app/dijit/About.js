@@ -2,6 +2,7 @@
  * Widget for displaying description of the site and giving attribution to frameworks and services used
  *
  * @module app/dijit/About
+ * @requires app/events/NavigationEvent
  */
 
 define([

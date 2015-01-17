@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: dijit/About.js</title>
+    <title>JSDoc: Source: events/NavigationEvent.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: dijit/About.js</h1>
+    <h1 class="page-title">Source: events/NavigationEvent.js</h1>
 
     
 
@@ -27,45 +27,28 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Widget for displaying description of the site and giving attribution to frameworks and services used
+ * Event constants for navigation
  *
- * @module app/dijit/About
- * @requires app/events/NavigationEvent
+ * @module app/events/NavigationEvent
  */
 
+
 define([
-    'dijit/_WidgetsInTemplateMixin',
-    'dijit/_TemplatedMixin',
-    'dijit/_WidgetBase',
-    'dojo/_base/declare',
-    "dojo/_base/lang",
-    "dojo/on",
-    "dojo/topic",
-    "app/events/NavigationEvent",
-    'dojo/text!app/dijit/templates/About.html'
-], function (WidgetsInTemplateMixin, TemplatedMixin, WidgetBase, declare, lang, on, topic, NavigationEvent, template) {
-    return declare([WidgetBase, TemplatedMixin, WidgetsInTemplateMixin], {
-        templateString: template,
-
+    'dojo/_base/declare'
+], function (declare) {
+    return declare([], {
         /**
-         * Called after DOM fragments have been added to the document.
-         * Handles button click to dispatch navigation event to route to play the game.
-         */
-        startup: function () {
-            this.inherited(arguments);
-
-            on(this.playGameBtn, "click", lang.hitch(this, this.playGameClicked));
-        },
-
+         * @constant ABOUT
+         * @description event used to show the about page.
+         **/
+        ABOUT: "navigation-event/about",
         /**
-         * Publishes a navigation event to route to play the game.
-         */
-        playGameClicked: function(evt) {
-            topic.publish(NavigationEvent.prototype.PLAY);
-        }
+         * @constant PLAY
+         * @description event used to show the play game page.
+         **/
+        PLAY: "navigation-event/play"
     });
-});
-</code></pre>
+});</code></pre>
         </article>
     </section>
 

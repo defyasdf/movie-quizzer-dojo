@@ -3,6 +3,9 @@
  * navigation routing.
  *
  * @module app/dijit/Main
+ * @requires app/events/NavigationEvent
+ * @requires app/dijit/About
+ * @requires app/dijit/Play
  */
 
 define([

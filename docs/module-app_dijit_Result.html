@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: app/dijit/Actor</title>
+    <title>JSDoc: Module: app/dijit/Result</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: app/dijit/Actor</h1>
+    <h1 class="page-title">Module: app/dijit/Result</h1>
 
     
 
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">Widget for displaying image and information about an Actor.</div>
+            <div class="description">Widget for displaying the success/failure of the user's movie guess</div>
         
 
         
@@ -87,7 +87,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dijit_Actor.js.html">dijit/Actor.js</a>, <a href="dijit_Actor.js.html#line1">line 1</a>
+        <a href="dijit_Result.js.html">dijit/Result.js</a>, <a href="dijit_Result.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -123,7 +123,7 @@
         <h3 class="subsection-title">Requires</h3>
 
         <ul>
-            <li><a href="module-app_data_Constants.html">module:app/data/Constants</a></li>
+            <li><a href="module-app_events_MovieEvent.html">module:app/events/MovieEvent</a></li>
         </ul>
     
 
@@ -143,14 +143,15 @@
 
     
 
-    <h4 class="name" id="~constructor"><span class="type-signature">(inner) </span>constructor<span class="signature">(name, actorID)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~constructor"><span class="type-signature">(inner) </span>constructor<span class="signature">(guessIsCorrect, correctTitle)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Creates an Actor.
+    Sets up the interface with a success/failure message to the user. Shows the correct title of the movie if the
+guess was incorrect.
 </div>
 
 
@@ -186,13 +187,13 @@
 
         <tr>
             
-                <td class="name"><code>name</code></td>
+                <td class="name"><code>guessIsCorrect</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">string</span>
+<span class="param-type">boolean</span>
 
 
             
@@ -202,14 +203,14 @@
 
             
 
-            <td class="description last">The name of the actor.</td>
+            <td class="description last">Was the user's guess correct</td>
         </tr>
 
     
 
         <tr>
             
-                <td class="name"><code>actorID</code></td>
+                <td class="name"><code>correctTitle</code></td>
             
 
             <td class="type">
@@ -225,7 +226,7 @@
 
             
 
-            <td class="description last">The freebase ID of the actor.</td>
+            <td class="description last">The correct title of the movie, only populated if the user's guess was incorrect.</td>
         </tr>
 
     
@@ -265,221 +266,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dijit_Actor.js.html">dijit/Actor.js</a>, <a href="dijit_Actor.js.html#line27">line 27</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~getImageURL"><span class="type-signature">(inner) </span>getImageURL<span class="signature">(actorID)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Creates image url for actor's image. The base image url is pulled from the Constants module,
-and the {{id}} template string is replaced with the actor's ID to make a fully qualified image
-url.
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>actorID</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The freebase ID of the actor.</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dijit_Actor.js.html">dijit/Actor.js</a>, <a href="dijit_Actor.js.html#line46">line 46</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="~startup"><span class="type-signature">(inner) </span>startup<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Called after DOM fragments have been added to the document.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dijit_Actor.js.html">dijit/Actor.js</a>, <a href="dijit_Actor.js.html#line36">line 36</a>
+        <a href="dijit_Result.js.html">dijit/Result.js</a>, <a href="dijit_Result.js.html#line33">line 33</a>
     </li></ul></dd>
     
 

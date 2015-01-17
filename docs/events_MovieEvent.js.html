@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: dijit/About.js</title>
+    <title>JSDoc: Source: events/MovieEvent.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: dijit/About.js</h1>
+    <h1 class="page-title">Source: events/MovieEvent.js</h1>
 
     
 
@@ -27,45 +27,28 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Widget for displaying description of the site and giving attribution to frameworks and services used
+ * Event constants for movies
  *
- * @module app/dijit/About
- * @requires app/events/NavigationEvent
+ * @module app/events/MovieEvent
  */
 
 define([
-    'dijit/_WidgetsInTemplateMixin',
-    'dijit/_TemplatedMixin',
-    'dijit/_WidgetBase',
-    'dojo/_base/declare',
-    "dojo/_base/lang",
-    "dojo/on",
-    "dojo/topic",
-    "app/events/NavigationEvent",
-    'dojo/text!app/dijit/templates/About.html'
-], function (WidgetsInTemplateMixin, TemplatedMixin, WidgetBase, declare, lang, on, topic, NavigationEvent, template) {
-    return declare([WidgetBase, TemplatedMixin, WidgetsInTemplateMixin], {
-        templateString: template,
+    'dojo/_base/declare'
+], function (declare) {
+    return declare([], {
 
         /**
-         * Called after DOM fragments have been added to the document.
-         * Handles button click to dispatch navigation event to route to play the game.
-         */
-        startup: function () {
-            this.inherited(arguments);
-
-            on(this.playGameBtn, "click", lang.hitch(this, this.playGameClicked));
-        },
-
+         * @constant MOVIE_CLICKED
+         * @description event used when a movie is clicked.
+         **/
+        MOVIE_CLICKED: "movie-event/movie-clicked",
         /**
-         * Publishes a navigation event to route to play the game.
-         */
-        playGameClicked: function(evt) {
-            topic.publish(NavigationEvent.prototype.PLAY);
-        }
+         * @constant NEXT_ROUND
+         * @description event used when moved to the next round.
+         **/
+        NEXT_ROUND: "movie-event/next-round"
     });
-});
-</code></pre>
+});</code></pre>
         </article>
     </section>
 
