@@ -9,15 +9,20 @@
 
 define([
     'dojo/_base/declare',
-    "dojo/_base/lang",
     "dojo/request/script",
     "app/data/Constants",
     "app/dijit/Movie",
     "app/dijit/Actor"
-], function (declare, lang, script, Constants, Movie, Actor) {
+], function (declare, script, Constants, Movie, Actor) {
     return declare(null, {
         fullMovieList: [],
 
+        /**
+         * Generates a Freebase query to use to retrieve a list of movies
+         * @param {boolean} guessIsCorrect - Was the user's guess correct
+         * @param {string} correctTitle - The correct title of the movie, only populated if the user's guess was incorrect.
+         * @returns {array} array containing query object
+         */
         generateQuery: function() {
             return [{
                 "type": "/film/film",
@@ -46,6 +51,11 @@ define([
             }];
         },
 
+        /**
+         * Retrieves a list of Movie objects using a Freebase query to be used in the game.
+         * @param {integer} limit - The number of movies to return in the original freebase query.
+         * @returns {array} Array of Movie objects
+         */
         getMovies: function (limit) {
             var _this = this,
                 query = this.generateQuery(limit),
@@ -76,6 +86,12 @@ define([
                 });
         },
 
+        /**
+        * Converts a list of Freebase movie objects to app/dijit/Movie objects to be used in the game.
+        * @param {array} movieList - A list of Freebase movie objects
+        * @param {integer} limit - The number of movies to return in the original freebase query.
+        * @returns {array} Array of Movie objects
+        */
         parseMovies: function(movieList, limit) {
             var parsedMovieList = [];
 
@@ -101,6 +117,11 @@ define([
             return parsedMovieList;
         },
 
+        /**
+         * Converts a list of Freebase actor objects to app/dijit/Actor objects to be used in the game.
+         * @param {array} actorList - A list of Freebase actor objects
+         * @returns {array} Array of Actor objects
+         */
         parseActors: function(actorList) {
             var parsedActorList = [];
 
@@ -116,6 +137,12 @@ define([
             return parsedActorList;
         },
 
+        /**
+         * Retrieves a random number, given a min and max range to choose from.
+         * @param {integer} min - Minimum number in range
+         * @param {integer} max - Maximum number in range
+         * @returns {integer} Random number within min/max range
+         */
         getRandomNumber: function(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
