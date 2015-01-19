@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: utils/FreebaseUtil.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: utils/FreebaseUtil.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Utility module to perform data calls to Google Freebase
+ *
+ * @module app/utils/FreebaseUtil
+ * @requires app/dijit/Movie
+ * @requires app/dijit/Actor
+ * @requires app/data/Constants
+ */
+
+define([
+    'dojo/_base/declare',
+    "dojo/request/script",
+    "app/data/Constants",
+    "app/dijit/Movie",
+    "app/dijit/Actor"
+], function (declare, script, Constants, Movie, Actor) {
+    return declare(null, {
+        fullMovieList: [],
+
+        /**
+         * Generates a Freebase query to use to retrieve a list of movies
+         * @param {boolean} guessIsCorrect - Was the user's guess correct
+         * @param {string} correctTitle - The correct title of the movie, only populated if the user's guess was incorrect.
+         * @returns {array} array containing query object
+         */
+        generateQuery: function() {
+            return [{
+                "type": "/film/film",
+                "limit": 100,
+                "name": null,
+                "id": null,
+                "mid": null,
+                "tagline": [],
+                "initial_release_date": null,
+                "gross_revenue": [{
+                    "amount": null,
+                    "currency": null,
+                    "valid_date": null
+                }],
+                "starring": [{
+                    "/film/performance/actor": {
+                        "mid": null,
+                        "name": null
+                    },
+                    "limit": 4
+                }],
+                "directed_by": [],
+                "genre": [],
+                "country": "United States of America",
+                "sort": "-gross_revenue.amount"
+            }];
+        },
+
+        /**
+         * Retrieves a list of Movie objects using a Freebase query to be used in the game.
+         * @param {integer} limit - The number of movies to return in the original freebase query.
+         * @returns {array} Array of Movie objects
+         */
+        getMovies: function (limit) {
+            var _this = this,
+                query = this.generateQuery(limit),
+                params = {
+                    jsonp: "callback",
+                    'query': {
+                        'key': Constants.prototype.api_key,
+                        'query': JSON.stringify(query)
+                    }
+            };
+
+            return script.get(Constants.prototype.service_url, params)
+                .then(function(data) {
+                    var movieIndexes = [],
+                        movieList = [];
+
+                    while(movieIndexes.length &lt; 4) {
+                        var randomIndex = Math.floor((Math.random() * 100) - 1);
+                        if(movieIndexes.indexOf(randomIndex) === -1){
+                            movieIndexes.push(randomIndex);
+                            movieList.push(data.result[randomIndex]);
+                        }
+                    }
+
+                    return _this.parseMovies(movieList, limit);
+                }, function (err) {
+                    console.log(err)
+                });
+        },
+
+        /**
+        * Converts a list of Freebase movie objects to app/dijit/Movie objects to be used in the game.
+        * @param {array} movieList - A list of Freebase movie objects
+        * @param {integer} limit - The number of movies to return in the original freebase query.
+        * @returns {array} Array of Movie objects
+        */
+        parseMovies: function(movieList, limit) {
+            var parsedMovieList = [];
+
+            for(var m=0; m &lt; movieList.length; m++) {
+                if(movieList[m]){
+                    parsedMovieList.push(
+                        new Movie(
+                            movieList[m].name,
+                            movieList[m].tagline[0],
+                            movieList[m].initial_release_date,
+                            movieList[m].genre[0],
+                            movieList[m].directed_by[0],
+                            movieList[m].gross_revenue[0].amount,
+                            this.parseActors(movieList[m].starring),
+                            movieList[m].mid
+                        )
+                    );
+                } else {
+                    this.getMovies(limit);
+                }
+            }
+
+            return parsedMovieList;
+        },
+
+        /**
+         * Converts a list of Freebase actor objects to app/dijit/Actor objects to be used in the game.
+         * @param {array} actorList - A list of Freebase actor objects
+         * @returns {array} Array of Actor objects
+         */
+        parseActors: function(actorList) {
+            var parsedActorList = [];
+
+            for (var star=0; star &lt; actorList.length; star++) {
+                parsedActorList.push(
+                    new Actor(
+                        actorList[star]['/film/performance/actor'].name,
+                        actorList[star]['/film/performance/actor'].mid
+                    )
+                );
+            }
+
+            return parsedActorList;
+        },
+
+        /**
+         * Retrieves a random number, given a min and max range to choose from.
+         * @param {integer} min - Minimum number in range
+         * @param {integer} max - Maximum number in range
+         * @returns {integer} Random number within min/max range
+         */
+        getRandomNumber: function(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+    });
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app_data_Constants.html">app/data/Constants</a></li><li><a href="module-app_dijit_About.html">app/dijit/About</a></li><li><a href="module-app_dijit_Actor.html">app/dijit/Actor</a></li><li><a href="module-app_dijit_Main.html">app/dijit/Main</a></li><li><a href="module-app_dijit_Movie.html">app/dijit/Movie</a></li><li><a href="module-app_dijit_Play.html">app/dijit/Play</a></li><li><a href="module-app_dijit_Result.html">app/dijit/Result</a></li><li><a href="module-app_events_MovieEvent.html">app/events/MovieEvent</a></li><li><a href="module-app_events_NavigationEvent.html">app/events/NavigationEvent</a></li><li><a href="module-app_utils_FreebaseUtil.html">app/utils/FreebaseUtil</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha13</a> on Sun Jan 18 2015 12:05:44 GMT-0800 (PST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

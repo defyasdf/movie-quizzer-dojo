@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: dijit/About.js</title>
+    <title>JSDoc: Source: dijit/Result.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: dijit/About.js</h1>
+    <h1 class="page-title">Source: dijit/Result.js</h1>
 
     
 
@@ -27,10 +27,10 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Widget for displaying description of the site and giving attribution to frameworks and services used
+ * Widget for displaying the success/failure of the user's movie guess
  *
- * @module app/dijit/About
- * @requires app/events/NavigationEvent
+ * @module app/dijit/Result
+ * @requires app/events/MovieEvent
  */
 
 define([
@@ -40,28 +40,55 @@ define([
     'dojo/_base/declare',
     "dojo/_base/lang",
     "dojo/on",
+    "dojo/dom-construct",
+    "dojo/dom-class",
     "dojo/topic",
-    "app/events/NavigationEvent",
-    'dojo/text!app/dijit/templates/About.html'
-], function (WidgetsInTemplateMixin, TemplatedMixin, WidgetBase, declare, lang, on, topic, NavigationEvent, template) {
+    'dojo/text!app/dijit/templates/Result.html',
+    "app/events/MovieEvent"
+], function (WidgetsInTemplateMixin, TemplatedMixin, WidgetBase, declare, lang, on, domConstruct, domClass, topic, template, MovieEvent) {
     return declare([WidgetBase, TemplatedMixin, WidgetsInTemplateMixin], {
         templateString: template,
+        guessIsCorrect: false,
+        resultLabel: "",
+        correctTitle: "",
 
         /**
-         * Called after DOM fragments have been added to the document.
-         * Handles button click to dispatch navigation event to route to play the game.
+         * Sets up the interface with a success/failure message to the user. Shows the correct title of the movie if the
+         * guess was incorrect.
+         * @param {boolean} guessIsCorrect - Was the user's guess correct
+         * @param {string} correctTitle - The correct title of the movie, only populated if the user's guess was incorrect.
          */
+        constructor: function(guessIsCorrect, correctTitle) {
+            if(guessIsCorrect) {
+                this.resultLabel = "Correct!";
+                this.correctTitle = "";
+            } else {
+                this.resultLabel = "Wrong!";
+                this.correctTitle = correctTitle;
+            }
+
+            this.guessIsCorrect = guessIsCorrect;
+        },
+
         startup: function () {
             this.inherited(arguments);
 
-            on(this.playGameBtn, "click", lang.hitch(this, this.playGameClicked));
+            if(this.guessIsCorrect) {
+                domConstruct.destroy(this.correctTitleLabel);
+                domClass.remove(this.resultLabel, "guess-incorrect-label");
+                domClass.add(this.resultLabel, "guess-correct-label");
+            } else {
+                domClass.remove(this.resultLabel, "guess-correct-label");
+                domClass.add(this.resultLabel, "guess-incorrect-label");
+            }
+
+            on(this.nextRoundBtn, "click", lang.hitch(this, this.nextRoundClicked));
         },
 
-        /**
-         * Publishes a navigation event to route to play the game.
-         */
-        playGameClicked: function(evt) {
-            topic.publish(NavigationEvent.prototype.PLAY);
+        nextRoundClicked: function(evt) {
+            topic.publish(MovieEvent.prototype.NEXT_ROUND);
+
+            this.destroy();
         }
     });
 });

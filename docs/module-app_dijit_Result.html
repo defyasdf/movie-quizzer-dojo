@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: app/dijit/Main</title>
+    <title>JSDoc: Module: app/dijit/Result</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: app/dijit/Main</h1>
+    <h1 class="page-title">Module: app/dijit/Result</h1>
 
     
 
@@ -38,8 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description">Main wrapper module for application, sets up layout template and general
-navigation routing.</div>
+            <div class="description">Widget for displaying the success/failure of the user's movie guess</div>
         
 
         
@@ -88,7 +87,7 @@ navigation routing.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dijit_main.js.html">dijit/main.js</a>, <a href="dijit_main.js.html#line1">line 1</a>
+        <a href="dijit_Result.js.html">dijit/Result.js</a>, <a href="dijit_Result.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -124,11 +123,7 @@ navigation routing.</div>
         <h3 class="subsection-title">Requires</h3>
 
         <ul>
-            <li><a href="module-app_events_NavigationEvent.html">module:app/events/NavigationEvent</a></li>
-        
-            <li><a href="module-app_dijit_About.html">module:app/dijit/About</a></li>
-        
-            <li><a href="module-app_dijit_Play.html">module:app/dijit/Play</a></li>
+            <li><a href="module-app_events_MovieEvent.html">module:app/events/MovieEvent</a></li>
         </ul>
     
 
@@ -148,14 +143,15 @@ navigation routing.</div>
 
     
 
-    <h4 class="name" id="~navigateToAbout"><span class="type-signature">(inner) </span>navigateToAbout<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~constructor"><span class="type-signature">(inner) </span>constructor<span class="signature">(guessIsCorrect, correctTitle)</span><span class="type-signature"></span></h4>
 
     
 
 
 
 <div class="description">
-    Handles navigation routing to show About page and hide all other content.
+    Sets up the interface with a success/failure message to the user. Shows the correct title of the movie if the
+guess was incorrect.
 </div>
 
 
@@ -166,171 +162,76 @@ navigation routing.</div>
 
 
 
-
-
-
-
-<dl class="details">
-
+    <h5>Parameters:</h5>
     
 
-    
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dijit_main.js.html">dijit/main.js</a>, <a href="dijit_main.js.html#line49">line 49</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <th>Type</th>
 
         
-            
-
-    
-
-    <h4 class="name" id="~navigateToPlay"><span class="type-signature">(inner) </span>navigateToPlay<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-<div class="description">
-    Handles navigation routing to show Play page and hide all other content.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dijit_main.js.html">dijit/main.js</a>, <a href="dijit_main.js.html#line57">line 57</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>guessIsCorrect</code></td>
             
 
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Was the user's guess correct</td>
+        </tr>
+
     
 
-    <h4 class="name" id="~startup"><span class="type-signature">(inner) </span>startup<span class="signature">()</span><span class="type-signature"></span></h4>
+        <tr>
+            
+                <td class="name"><code>correctTitle</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The correct title of the movie, only populated if the user's guess was incorrect.</td>
+        </tr>
 
     
-
-
-
-<div class="description">
-    Called after DOM fragments have been added to the document. Subscribes to
-NavigationEvents to handle routing and navigation menu button
-clicks.
-</div>
-
-
-
-
-
-
-
-
+    </tbody>
+</table>
 
 
 
@@ -365,7 +266,7 @@ clicks.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="dijit_main.js.html">dijit/main.js</a>, <a href="dijit_main.js.html#line35">line 35</a>
+        <a href="dijit_Result.js.html">dijit/Result.js</a>, <a href="dijit_Result.js.html#line33">line 33</a>
     </li></ul></dd>
     
 

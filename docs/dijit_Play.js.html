@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: dijit/Play.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: dijit/Play.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Widget for displaying the game section of the site.
+ * Brings together the functionality to retrieve movies and actors,
+ * and implements the game user interface.
+ *
+ * @module app/dijit/Play
+ * @requires app/data/Constants
+ * @requires app/events/MovieEvent
+ * @requires app/dijit/Result
+ * @requires app/utils/FreebaseUtil
+ */
+
+define([
+    'dijit/_WidgetsInTemplateMixin',
+    'dijit/_TemplatedMixin',
+    'dijit/_WidgetBase',
+    'dojo/_base/declare',
+    'dojo/_base/lang',
+    "dojo/topic",
+    "dojo/on",
+    "dojo/dom-attr",
+    "dojo/dom-class",
+    'dojo/dom',
+    'dojo/dom-construct',
+    'dojo/text!app/dijit/templates/Play.html',
+    "app/data/Constants",
+    "app/utils/FreebaseUtil",
+    "app/events/MovieEvent",
+    "app/dijit/Result"
+], function (WidgetsInTemplateMixin, TemplatedMixin, WidgetBase, declare, lang, topic, on,
+             domAttr, domClass, dom, domConstruct, template, Constants, FreebaseUtil,
+             MovieEvent, Result) {
+    return declare([WidgetBase, TemplatedMixin, WidgetsInTemplateMixin], {
+        templateString: template,
+        movies: [],
+        movie: null,
+        freebaseUtil: new FreebaseUtil(),
+
+        startup: function () {
+            this.inherited(arguments);
+
+            //Subscribe to our events
+            topic.subscribe(MovieEvent.prototype.MOVIE_CLICKED, lang.hitch(this, this.movieClicked));
+            topic.subscribe(MovieEvent.prototype.NEXT_ROUND, lang.hitch(this, this.setupMovies));
+
+            on(this.movieHintBtn, "click", lang.hitch(this, this.movieHintClicked));
+
+            //Initially setup a round of movies
+            this.setupMovies();
+        },
+
+        /**
+         * Toggles on and off the movie loading screen. This gives the user information that
+         * movies are being fetched while the request to Google Freebase occurs.
+         * @param {boolean} showLoading - Whether or not we should show the loading message.
+         */
+        toggleLoading: function(showLoading) {
+            if(showLoading) {
+                //show the loading message
+                domClass.remove(this.movieLoading, "hidden");
+                domClass.add(this.movieDetails, "hidden");
+            } else {
+                //hide the loading message
+                domClass.remove(this.movieDetails, "hidden");
+                domClass.add(this.movieLoading, "hidden");
+            }
+        },
+
+        /**
+         * Retrieves a list of movies from Google Freebase and selects random movies to use in the game.
+         */
+        setupMovies: function() {
+            //show our loading message and hide the movie list
+            this.toggleLoading(true);
+
+            //In case we have movies from a previous round, remove all to be sure we start clean
+            this.removeAllMovies();
+
+            //Get the movies with a call to Freebase using our Freebase Utility
+            this.freebaseUtil.getMovies(Constants.prototype.NUMBER_OF_MOVIES)
+                .then(lang.hitch(this, function(movies) {
+                    //hide our loading message and show the movie list
+                    this.toggleLoading(false);
+
+                    //We need to loop over each movie and place the resulting
+                    //dom node into our movie list
+                    this.createMovieModuleList(movies);
+
+                    //Randomly select one of our movies as the correct option
+                    this.setSelectedMovie(
+                        movies[
+                            this.freebaseUtil.getRandomNumber(
+                                0,
+                                (Constants.prototype.NUMBER_OF_MOVIES - 1)
+                            )
+                        ]
+                    );
+
+                    //Store the movies so we can have a reference to destroy them later
+                    this.movies = movies;
+                }));
+        },
+
+        /**
+         * Given a list of movie widgets, loops through each one to start and place it in the movie list container.
+         * @param {array} movies - Array of Movie objects.
+         */
+        createMovieModuleList: function(movies) {
+            for(var mv=0; mv &lt; movies.length; mv++) {
+                //Call the startup method as it is not always called automatically
+                movies[mv].startup();
+                //Place the movie as the last item in our movie list
+                domConstruct.place(movies[mv].domNode, dom.byId("movieList"), "last");
+            }
+        },
+
+        movieClicked: function(evt) {
+            var result;
+            if(evt.movieID === this.movie.movieID) {
+                //User selected the correct movie
+                result = new Result(true);
+            } else {
+                //User selected the incorrect movie, so we pass along the correct title
+                result = new Result(false, this.movie.title);
+            }
+
+            //Remove all movies from our movie listing
+            this.removeAllMovies();
+
+            //Startup the result widget and place it just before our movie list (which is now empty)
+            result.startup();
+            domConstruct.place(result.domNode, "movieList", "before");
+        },
+
+        movieHintClicked: function(evt) {
+            domClass.add(this.movieHintBtn, "hidden");
+            domClass.remove(this.movieHint, "hidden");
+        },
+
+        /**
+         * Given a Movie object, sets the tagline and hints for the game round. This is the movie the user will be
+         * trying to guess.
+         * @param {Movie} movie - The movie the user is trying to guess.
+         */
+        setSelectedMovie: function(movieObj) {
+            //if the movie does not have a tagline, we don't use it and start the process over. Otherwise
+            //we set the movie attributes to the elements in the dom
+            if(movieObj.tagline) {
+                domAttr.set(this.taglineLabel, "innerHTML", '"' + movieObj.tagline + '"');
+                domAttr.set(this.yearLabel, "innerHTML", movieObj.releaseDate);
+                domAttr.set(this.genreLabel, "innerHTML", movieObj.genre);
+                domAttr.set(this.directorLabel, "innerHTML", movieObj.director);
+                domAttr.set(this.revenueLabel, "innerHTML", movieObj.revenue);
+
+                //loop over the actors list and startup instances, place them into the dom
+                for(var actorIdx=0; actorIdx &lt; movieObj.actors.length; actorIdx++) {
+                    movieObj.actors[actorIdx].startup();
+                    domConstruct.place(movieObj.actors[actorIdx].domNode, "actorList", "last");
+                }
+
+                //store the selected movie for use later
+                this.movie = movieObj;
+            } else {
+                //Get new movies until we have a tagline
+                this.setupMovies();
+            }
+        },
+
+        /**
+         * Removes and destroys all movie and actor widgets that have been loaded. This is called after each round.
+         */
+        removeAllMovies: function() {
+            //loop over all the movies
+            for(var mv=0; mv &lt; this.movies.length; mv++) {
+                //destroy our movie instances
+                this.movies[mv].destroy();
+
+                //loop over all actors
+                for(var act=0; act &lt; this.movies[mv].actors.length; act++) {
+                    //destroy our actor instances
+                    this.movies[mv].actors[act].destroy();
+                }
+
+            }
+
+            //hide the movie hint and show the hint button for the next movie
+            domClass.add(this.movieHint, "hidden");
+            domClass.remove(this.movieHintBtn, "hidden");
+            //clear the movie and actor list, in case anything has not been cleaned up
+            domAttr.set(this.movieList, "innerHTML", "");
+            domAttr.set(this.actorList, "innerHTML", "");
+        }
+    });
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app_data_Constants.html">app/data/Constants</a></li><li><a href="module-app_dijit_About.html">app/dijit/About</a></li><li><a href="module-app_dijit_Actor.html">app/dijit/Actor</a></li><li><a href="module-app_dijit_Main.html">app/dijit/Main</a></li><li><a href="module-app_dijit_Movie.html">app/dijit/Movie</a></li><li><a href="module-app_dijit_Play.html">app/dijit/Play</a></li><li><a href="module-app_dijit_Result.html">app/dijit/Result</a></li><li><a href="module-app_events_MovieEvent.html">app/events/MovieEvent</a></li><li><a href="module-app_events_NavigationEvent.html">app/events/NavigationEvent</a></li><li><a href="module-app_utils_FreebaseUtil.html">app/utils/FreebaseUtil</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha13</a> on Sun Jan 18 2015 12:05:44 GMT-0800 (PST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: dijit/Movie.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: dijit/Movie.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Widget for displaying image and information about a Movie.
+ *
+ * @module app/dijit/Movie
+ * @requires app/data/Constants
+ * @requires app/events/MovieEvent
+ */
+
+define([
+    'dijit/_WidgetsInTemplateMixin',
+    'dijit/_TemplatedMixin',
+    'dijit/_WidgetBase',
+    'dojo/_base/declare',
+    "dojo/_base/lang",
+    "dojo/on",
+    "dojo/topic",
+    'dojo/text!app/dijit/templates/Movie.html',
+    "app/events/MovieEvent",
+    "app/data/Constants"
+], function (WidgetsInTemplateMixin, TemplatedMixin, WidgetBase, declare, lang, on, topic, template, MovieEvent, Constants) {
+    return declare([WidgetBase, TemplatedMixin, WidgetsInTemplateMixin], {
+        templateString: template,
+        title: "",
+        tagline: "",
+        releaseDate: "",
+        genre: "",
+        director: "",
+        revenue: "",
+        actors: [],
+        imageURL: "",
+        movieID: "",
+
+        /**
+         * Creates a Movie.
+         * @function constructor
+         * @param {string} title - title of the movie.
+         * @param {string} tagline - tagline, or short description, of the movie.
+         * @param {date} releaseDate - date of movie release
+         * @param {string} genre - genre of the movie
+         * @param {string} director - name of the director of the movie
+         * @param {number} revenue - total gross revenue of the movie
+         * @param {array} actors - top actors starring in the movie
+         * @param {string} movieID - google freebase "mid" parameter used as movieID
+         */
+        constructor: function(title, tagline, releaseDate, genre, director, revenue, actors, movieID) {
+            this.title = title;
+            this.tagline = tagline;
+            this.releaseDate = releaseDate;
+            this.genre = genre;
+            this.director = director;
+            this.revenue = revenue;
+            this.actors = actors;
+            this.imageURL = this.getImageURL(movieID);
+            this.movieID = movieID;
+        },
+
+        startup: function () {
+            this.inherited(arguments);
+
+            //when the movie is clicked, we need to fire off a topic event
+            on(this.movieLink, "click", lang.hitch(this, this.movieClicked));
+        },
+
+        movieClicked: function(evt) {
+            //publish our movie click event and pass the movieID
+            topic.publish(MovieEvent.prototype.MOVIE_CLICKED, {
+                movieID: this.movieID
+            });
+        },
+
+        /**
+         * Setter function for releaseDate attribute. Formats the date to a 4 year format (ex: 2001)
+         * @method _setReleaseDateAttr
+         * @param {string} releaseDate - date represented as a string, typically yyyy-mm-dd.
+         */
+        _setReleaseDateAttr: function(releaseDate) {
+            //format so the release date only shows the year
+            this.releaseDate = new Date(releaseDate).getFullYear();
+        },
+
+        /**
+         * Setter function for revenue attribute. Formats the revenue to USD currency format
+         * @param {Number} revenue - the total grossing revenue of the movie.
+         */
+        _setRevenueAttr: function(revenue) {
+            //format so the revenue is in USD currency format
+            this.revenue = '$' + Number(revenue)
+                .toFixed(2)
+                .replace(/\d(?=(\d{3})+\.)/g, '$&amp;,');
+        },
+
+        /**
+         * Returns the fully qualified url for the movie image.
+         * @param {String} movieID - The google freebase movie id (mid).
+         */
+        getImageURL: function(movieID) {
+            //use the image constant and replace the id placeholder with the movieID string
+            return Constants.prototype.image_path_poster.replace("{{id}}", movieID);
+        }
+    });
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-app_data_Constants.html">app/data/Constants</a></li><li><a href="module-app_dijit_About.html">app/dijit/About</a></li><li><a href="module-app_dijit_Actor.html">app/dijit/Actor</a></li><li><a href="module-app_dijit_Main.html">app/dijit/Main</a></li><li><a href="module-app_dijit_Movie.html">app/dijit/Movie</a></li><li><a href="module-app_dijit_Play.html">app/dijit/Play</a></li><li><a href="module-app_dijit_Result.html">app/dijit/Result</a></li><li><a href="module-app_events_MovieEvent.html">app/events/MovieEvent</a></li><li><a href="module-app_events_NavigationEvent.html">app/events/NavigationEvent</a></li><li><a href="module-app_utils_FreebaseUtil.html">app/utils/FreebaseUtil</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha13</a> on Sun Jan 18 2015 12:05:44 GMT-0800 (PST)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: data/Constants.js</title>
+    <title>JSDoc: Source: events/NavigationEvent.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: data/Constants.js</h1>
+    <h1 class="page-title">Source: events/NavigationEvent.js</h1>
 
     
 
@@ -27,40 +27,26 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>/**
- * Module for defining application constants used within other modules.
+ * Event constants for navigation
  *
- * @module app/data/Constants
+ * @module app/events/NavigationEvent
  */
+
 
 define([
     'dojo/_base/declare'
 ], function (declare) {
     return declare([], {
         /**
-         * @constant NUMBER_OF_MOVIES
-         * @description The number of movies to show for each round
+         * @constant ABOUT
+         * @description event used to show the about page.
          **/
-        NUMBER_OF_MOVIES: 4,
+        ABOUT: "navigation-event/about",
         /**
-         * @constant SERVICE_URL
-         * @description The Google Freebase MQL service url.
+         * @constant PLAY
+         * @description event used to show the play game page.
          **/
-        service_url: 'https://www.googleapis.com/freebase/v1/mqlread',
-        /**
-         * @constant API_KEY
-         * @description The API Key for Google Freebase
-         **/
-        api_key: 'AIzaSyCTjRzqa0530KFmdQHoWnj2dYVhDoThRts',
-        /**
-         * @constant IMAGE_PATH
-         * @description Image path template for freebase images, using {{id}} as a placeholder for the mid result
-         **/
-        image_path: 'https://usercontent.googleapis.com/freebase/v1/image{{id}}?maxwidth=64&amp;maxheight=64&amp;mode=fillcropmid&amp;key=' + 'AIzaSyCTjRzqa0530KFmdQHoWnj2dYVhDoThRts',
-        /**
-         * @constant IMAGE_PATH_POSTER
-         * @description Image path template for freebase movie poster images, using {{id}} as a placeholder for the mid result
-         **/
-        image_path_poster: 'https://usercontent.googleapis.com/freebase/v1/image{{id}}?maxwidth=150&amp;maxheight=180&amp;mode=fillcropmid&amp;key=' + 'AIzaSyCTjRzqa0530KFmdQHoWnj2dYVhDoThRts'
+        PLAY: "navigation-event/play"
     });
 });</code></pre>
         </article>
